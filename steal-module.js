@@ -17,7 +17,8 @@ class STEALComponent extends HTMLElement {
                 ${this.innerHTML}
               })()
             </script>
-         `
+          `
+          this.innerHTML = '' // Remove none needed markup from DOM
           // inject our DOM content into the cached Shadow DOM
           // this is what is required to make the JS execute
           this.shadow.appendChild(document.importNode(template.content, true))
