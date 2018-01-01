@@ -6,15 +6,14 @@ class STEALComponent extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
   }
   connectedCallback () {
-          // build a <template> element to inject
           const template = document.createElement('template')
-
+          const htmlDecode = innerHTML => Object.assign(document.createElement('textarea'), {innerHTML}).value;
           // add the JS last, in a <script> tag, as well as wrapped by an IIFE
           // the IIFE ensures nothing leaks to the window
           template.innerHTML += `
             <script>
               (() => {
-                ${this.innerHTML}
+                ${htmlDecode(this.innerHTML)}
               })()
             </script>
           `
